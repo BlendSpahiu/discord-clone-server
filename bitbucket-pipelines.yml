@@ -1,0 +1,63 @@
+definitions:
+    services:
+        docker:
+            memory: 3072
+pipelines:
+    branches:
+        dev:
+            - step:
+                  name: 'Build docker image (DEV)'
+                  services:
+                      - docker
+                  script:
+                      - export IMAGE_NAME=realestate-actions-dev
+                      - export TAG_NAME=registry.digitalocean.com/uwork-k8s/${IMAGE_NAME}
+                      - export TAG_NAME_WITH_COMMIT=registry.digitalocean.com/uwork-k8s/${IMAGE_NAME}:${BITBUCKET_COMMIT}
+                      - docker build -t $IMAGE_NAME -f Dockerfile .
+                      - docker tag $IMAGE_NAME $TAG_NAME
+                      - docker tag $IMAGE_NAME $TAG_NAME:${BITBUCKET_COMMIT}
+                      - docker login -u $DO_TOKEN -p $DO_TOKEN registry.digitalocean.com
+                      - docker push $TAG_NAME_WITH_COMMIT
+                      - docker push $TAG_NAME
+            - step:
+                  name: 'Deploy to Kubernetes'
+                  image: atlassian/pipelines-kubectl
+                  script:
+                      # Export consts
+                      - export NS=ornio-dev
+                      - export IMAGE_NAME=realestate-actions-dev
+                      - export DEPLOYMENT_NAME=realestate-actions-dev
+                      - export TAG_NAME_WITH_COMMIT=registry.digitalocean.com/uwork-k8s/${IMAGE_NAME}:${BITBUCKET_COMMIT}
+                      # Download and install `doctl` so that we can refresh configs for k8s
+                      - apk --no-cache add curl
+                      - curl -sL https://github.com/digitalocean/doctl/releases/download/v1.45.1/doctl-1.45.1-linux-amd64.tar.gz | tar -xzv
+                      - mv ./doctl /usr/local/bin
+                      # Get the config file
+                      - doctl -t $DO_TOKEN k8s cluster kubeconfig show d194a202-c796-477e-bbe7-54ef4f13abe4 > kubeconfig.yml
+                      - kubectl --insecure-skip-tls-verify --kubeconfig=kubeconfig.yml --namespace=${NS} set image deployment/${DEPLOYMENT_NAME} ${DEPLOYMENT_NAME}=${TAG_NAME_WITH_COMMIT}
+    custom:
+        k8s-dev-apply:
+            - step:
+                  name: 'Apply K8S  (DEV)'
+                  image: atlassian/pipelines-kubectl
+                  script:
+                      # Download and install `doctl` so that we can refresh configs for k8s
+                      - apk --no-cache add curl
+                      - curl -sL https://github.com/digitalocean/doctl/releases/download/v1.45.1/doctl-1.45.1-linux-amd64.tar.gz | tar -xzv
+                      - mv ./doctl /usr/local/bin
+                      # Get the config file
+                      - doctl -t $DO_TOKEN k8s cluster kubeconfig show d194a202-c796-477e-bbe7-54ef4f13abe4 > kubeconfig.yml
+                      - kubectl --insecure-skip-tls-verify --kubeconfig=kubeconfig.yml apply -f .k8s/dev
+        k8s-dev-delete:
+            -   step:
+                    name: 'Delete K8S (DEV)'
+                    image: atlassian/pipelines-kubectl
+                    script:
+                        # Download and install `doctl` so that we can refresh configs for k8s
+                        - apk --no-cache add curl
+                        - curl -sL https://github.com/digitalocean/doctl/releases/download/v1.45.1/doctl-1.45.1-linux-amd64.tar.gz | tar -xzv
+                        - mv ./doctl /usr/local/bin
+                        # Get the config file
+                        - doctl -t $DO_TOKEN k8s cluster kubeconfig show d194a202-c796-477e-bbe7-54ef4f13abe4 > kubeconfig.yml
+                        - kubectl --insecure-skip-tls-verify --kubeconfig=kubeconfig.yml delete -f .k8s/dev
+

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    labels:
+        app: realestate-actions-dev
+    name: realestate-actions-dev
+    namespace: ornio-dev
+spec:
+    ports:
+        - name: web
+          protocol: TCP
+          port: 5000
+          targetPort: 5000
+    selector:
+        app: realestate-actions-dev
