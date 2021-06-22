@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app: realestate-actions-dev
+    name: realestate-actions-dev
+    namespace: ornio-dev
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: realestate-actions-dev
+    template:
+        metadata:
+            labels:
+                app: realestate-actions-dev
+        spec:
+            containers:
+                - image: registry.digitalocean.com/uwork-k8s/realestate-actions-dev
+                  imagePullPolicy: Always
+                  name: realestate-actions-dev
+                  ports:
+                      - name: web
+                        containerPort: 5000
+                        protocol: TCP
+                  resources: {}
+            imagePullSecrets:
+                - name: registry-uwork-k8s
