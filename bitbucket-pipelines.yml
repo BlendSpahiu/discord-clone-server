@@ -10,7 +10,7 @@ pipelines:
                   services:
                       - docker
                   script:
-                      - export IMAGE_NAME=realestate-actions-dev
+                      - export IMAGE_NAME=real-estate-actions-dev
                       - export TAG_NAME=registry.digitalocean.com/uwork-k8s/${IMAGE_NAME}
                       - export TAG_NAME_WITH_COMMIT=registry.digitalocean.com/uwork-k8s/${IMAGE_NAME}:${BITBUCKET_COMMIT}
                       - docker build -t $IMAGE_NAME -f Dockerfile .
@@ -25,8 +25,8 @@ pipelines:
                   script:
                       # Export consts
                       - export NS=ornio-dev
-                      - export IMAGE_NAME=realestate-actions-dev
-                      - export DEPLOYMENT_NAME=realestate-actions-dev
+                      - export IMAGE_NAME=real-estate-actions-dev
+                      - export DEPLOYMENT_NAME=real-estate-actions-dev
                       - export TAG_NAME_WITH_COMMIT=registry.digitalocean.com/uwork-k8s/${IMAGE_NAME}:${BITBUCKET_COMMIT}
                       # Download and install `doctl` so that we can refresh configs for k8s
                       - apk --no-cache add curl
