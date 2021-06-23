@@ -5,5 +5,4 @@ COPY .env.dev /app/.env
 COPY . /app
 RUN npm i
 RUN npm run build
-COPY /src/views /app/build/views
 CMD ["node", "./build/index.js"]
