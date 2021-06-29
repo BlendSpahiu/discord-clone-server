@@ -4,6 +4,9 @@ import { Request, Response, NextFunction, Router } from 'express';
 // middlewares
 import { ValidationMiddleware } from '../middleware/Validation.middleware';
 
+// services
+import { LoginUserService } from '../services/LoginUser.service';
+
 // validators
 import { LoginUserValidator } from '../validators/LoginUser.validator';
 
@@ -16,7 +19,7 @@ LoginUserController.post(
         try {
             const { email, password } = req.body.input;
 
-            // const result = await LoginUserService.login(email, password);
+            const result = await LoginUserService.login(email, password);
         } catch (err) {
             console.error(err);
         }
