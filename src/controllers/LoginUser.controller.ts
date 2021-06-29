@@ -7,6 +7,9 @@ import { ValidationMiddleware } from '../middleware/Validation.middleware';
 // services
 import { LoginUserService } from '../services/LoginUser.service';
 
+// utils
+import { ok } from '../utils';
+
 // validators
 import { LoginUserValidator } from '../validators/LoginUser.validator';
 
@@ -20,8 +23,10 @@ LoginUserController.post(
             const { email, password } = req.body.input;
 
             const result = await LoginUserService.login(email, password);
+
+            res.status(result.httpCode).send(result.data);
         } catch (err) {
-            console.error(err);
+            next(err);
         }
     }
 );
