@@ -1,7 +1,6 @@
 import express, { Application } from 'express';
 import { Model } from 'objection';
 import Knex from 'knex';
-
 import { routes } from './routes';
 
 // Middleware

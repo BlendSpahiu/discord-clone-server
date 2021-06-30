@@ -1,10 +1,5 @@
-// jwt
 import jwt, { Algorithm } from 'jsonwebtoken';
-
-// configs
 import { JWT_ALGORITHM, JWT_SECRET, JWT_EXPIRES_IN } from '../config/jwt';
-
-// models
 import UserModel from '../models/User.model';
 
 export const generateJWT = (user: UserModel) => {
