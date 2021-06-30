@@ -1,3 +1,3 @@
 import bcrypt from 'bcryptjs';
 
-export const HashPassword = async (pwd: string) => await bcrypt.hash(pwd, 10);
+export const hashPassword = async (pwd: string) => await bcrypt.hash(pwd, 10);
