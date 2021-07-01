@@ -3,7 +3,7 @@ import CompanyModel from './Company.model';
 import ProfileImagesModel from './ProfileImages.model';
 
 export default class UserModel extends Model {
-    id!: number;
+    id?: number;
     first_name!: string;
     last_name!: string;
     email!: string;
@@ -48,17 +48,17 @@ export default class UserModel extends Model {
                 modelClass: CompanyModel,
                 join: {
                     from: 'users.id',
-                    to: 'companies.user_id'
-                }
+                    to: 'companies.user_id',
+                },
             },
             profile_images: {
                 relation: Model.HasManyRelation,
                 modelClass: ProfileImagesModel,
                 join: {
                     from: 'users.id',
-                    to: 'profile_images.user_id'
-                }
-            }
+                    to: 'profile_images.user_id',
+                },
+            },
         };
     }
 }

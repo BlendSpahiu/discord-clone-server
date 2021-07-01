@@ -2,7 +2,7 @@ import { Model } from 'objection';
 import UserModel from './User.model';
 
 export default class CompanyModel extends Model {
-    id!: number;
+    id?: number;
     name!: string;
     business_number!: number;
     status!: string;
@@ -22,7 +22,7 @@ export default class CompanyModel extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['name','business_number','status'],
+            required: ['name', 'business_number', 'status'],
 
             properties: {
                 id: { type: 'integer' },
@@ -40,13 +40,13 @@ export default class CompanyModel extends Model {
     static get relationMappings() {
         return {
             user_id: {
-               relation: Model.BelongsToOneRelation ,
-               modelClass: UserModel,
-               join: {
-                   from: 'users.id',
-                   to: 'companies.user_id'
-               }
-            }
+                relation: Model.BelongsToOneRelation,
+                modelClass: UserModel,
+                join: {
+                    from: 'users.id',
+                    to: 'companies.user_id',
+                },
+            },
         };
     }
 }
