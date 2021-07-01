@@ -1,4 +1,6 @@
 import { Model } from 'objection';
+import CompanyModel from './Company.model';
+import ProfileImagesModel from './ProfileImages.model';
 
 export default class UserModel extends Model {
     id!: number;
@@ -40,6 +42,23 @@ export default class UserModel extends Model {
     // This object defines the relations to other models. The relationMappings
     // property can be a thunk to prevent circular dependencies.
     static get relationMappings() {
-        return {};
+        return {
+            companies: {
+                relation: Model.HasOneRelation,
+                modelClass: CompanyModel,
+                join: {
+                    from: 'users.id',
+                    to: 'companies.user_id'
+                }
+            },
+            profile_images: {
+                relation: Model.HasManyRelation,
+                modelClass: ProfileImagesModel,
+                join: {
+                    from: 'users.id',
+                    to: 'profile_images.user_id'
+                }
+            }
+        };
     }
 }

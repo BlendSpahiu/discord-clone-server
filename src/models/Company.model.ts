@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import UserModel from './User.model';
 
 export default class CompanyModel extends Model {
     id!: number;
@@ -21,7 +22,7 @@ export default class CompanyModel extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['name','business_number','status','user_id'],
+            required: ['name','business_number','status'],
 
             properties: {
                 id: { type: 'integer' },
@@ -37,6 +38,15 @@ export default class CompanyModel extends Model {
     // This object defines the relations to other models. The relationMappings
     // property can be a thunk to prevent circular dependencies.
     static get relationMappings() {
-        return {};
+        return {
+            user_id: {
+               relation: Model.BelongsToOneRelation ,
+               modelClass: UserModel,
+               join: {
+                   from: 'users.id',
+                   to: 'companies.user_id'
+               }
+            }
+        };
     }
 }

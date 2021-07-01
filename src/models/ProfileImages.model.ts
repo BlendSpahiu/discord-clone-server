@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import UserModel from './User.model';
 
 export default class ProfileImagesModel extends Model {
     id!: number;
@@ -37,6 +38,15 @@ export default class ProfileImagesModel extends Model {
     // This object defines the relations to other models. The relationMappings
     // property can be a thunk to prevent circular dependencies.
     static get relationMappings() {
-        return {};
+        return {
+            user_id: {
+               relation: Model.BelongsToOneRelation ,
+               modelClass: UserModel,
+               join: {
+                   from: 'users.id',
+                   to: 'profile_images.user_id'
+               }
+            }
+        };
     }
 }
