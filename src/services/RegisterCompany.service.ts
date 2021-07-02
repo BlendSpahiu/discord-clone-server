@@ -1,6 +1,5 @@
 import UserModel from '../models/User.model';
 import CompanyModel from '../models/Company.model';
-import ProfileImagesModel from '../models/ProfileImages.model';
 import { ok, failure, generateJWT, hashPassword } from '../utils/index';
 import { RoleUsersEnums } from '../interfaces/enums/RoleUsers.enums';
 import { StatusUserEnums } from '../interfaces/enums/StatusUser.enums';
