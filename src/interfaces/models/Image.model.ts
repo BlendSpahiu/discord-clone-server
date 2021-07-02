@@ -1,6 +1,6 @@
 export interface ImageModel {
     size: number;
-    name: string;
+    file_name: string;
     base64str: string;
     mime_type: string;
 }

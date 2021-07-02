@@ -1,4 +1,4 @@
-import {ImageModel } from './Image.model'
+import { ImageModel } from './Image.model';
 
 export interface RegisterCompanyModel {
     first_name: string;

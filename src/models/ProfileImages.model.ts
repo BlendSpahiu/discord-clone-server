@@ -2,7 +2,7 @@ import { Model } from 'objection';
 import UserModel from './User.model';
 
 export default class ProfileImagesModel extends Model {
-    id?: number;
+    id!: number;
     path!: string;
     size!: number;
     mime_type!: string;
@@ -29,6 +29,7 @@ export default class ProfileImagesModel extends Model {
                 path: { type: 'string' },
                 size: { type: 'integer' },
                 mime_type: { type: 'string' },
+                user_id: { type: 'integer' },
                 created_at: { type: 'date' },
                 updated_at: { type: 'date' },
             },
@@ -39,12 +40,12 @@ export default class ProfileImagesModel extends Model {
     // property can be a thunk to prevent circular dependencies.
     static get relationMappings() {
         return {
-            user_id: {
+            user: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: UserModel,
                 join: {
-                    from: 'users.id',
-                    to: 'profile_images.user_id',
+                    from: 'profile_images.user_id',
+                    to: 'users.id',
                 },
             },
         };

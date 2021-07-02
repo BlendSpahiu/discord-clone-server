@@ -30,7 +30,6 @@ export const upload = multer({
             cb(null, { fieldName: file.fieldname });
         },
         key: function (req, file, cb) {
-            console.log('path with date', Date.now().toString());
             cb(null, Date.now().toString());
         },
     }),
