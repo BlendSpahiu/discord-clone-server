@@ -1,10 +1,10 @@
 import { StatusCodeEnums } from '../interfaces/enums/StatusCode.enums';
 import UserModel from '../models/User.model';
-import { RegisterUserModel } from '../interfaces/models/RegisterUser.model';
+import { RegisterModel } from '../interfaces/models/Register.model';
 import { ok, failure, generateJWT, hashPassword } from '../utils/index';
 
-export const RegisterUserService = {
-    register: async (data: RegisterUserModel) => {
+export const RegisterService = {
+    register: async (data: RegisterModel) => {
         const { first_name, last_name, email, password } = data;
 
         // Check if user with this email exists
