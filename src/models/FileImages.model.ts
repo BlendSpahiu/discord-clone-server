@@ -7,7 +7,6 @@ export default class FileImagesModel extends Model {
     file_path!: string;
     file_size!: number;
     mime_type!: string;
-    user_id!: number;
     created_at?: Date;
     updated_at?: Date;
 
