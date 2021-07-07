@@ -6,7 +6,7 @@ export default class UserModel extends Model {
     last_name!: string;
     email!: string;
     password!: string;
-    role_name!: string;
+    role!: string;
     created_at?: Date;
     updated_at?: Date;
 
@@ -22,7 +22,7 @@ export default class UserModel extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['first_name', 'last_name', 'email', 'password', 'role_name'],
+            required: ['first_name', 'last_name', 'email', 'password', 'role'],
 
             properties: {
                 id: { type: 'integer' },
@@ -30,7 +30,7 @@ export default class UserModel extends Model {
                 last_name: { type: 'string' },
                 email: { type: 'string' },
                 password: { type: 'string' },
-                role_name: { type: 'string' },
+                role: { type: 'string' },
                 created_at: { type: 'date' },
                 updated_at: { type: 'date' },
             },

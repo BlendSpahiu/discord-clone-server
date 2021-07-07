@@ -20,7 +20,7 @@ export const RegisterService = {
             last_name,
             email,
             password: hashedPassword,
-            role_name: 'user',
+            role: 'user',
         });
 
         return ok({ token: generateJWT(insertUser) });
