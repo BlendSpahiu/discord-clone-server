@@ -25,7 +25,7 @@ export const RegisterCompanyService = {
             last_name,
             first_name,
             password: hashedPwd,
-            role_name: RoleUsersEnums.COMPANY,
+            role: RoleUsersEnums.COMPANY,
         });
 
         const insertCompany = await CompanyModel.query().insert({
