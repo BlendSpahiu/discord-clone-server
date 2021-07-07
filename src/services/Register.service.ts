@@ -2,6 +2,7 @@ import { StatusCodeEnums } from '../interfaces/enums/StatusCode.enums';
 import UserModel from '../models/User.model';
 import { RegisterModel } from '../interfaces/models/Register.model';
 import { ok, failure, generateJWT, hashPassword } from '../utils/index';
+import { RoleUsersEnums as RUE } from '../interfaces/enums/RoleUsers.enums';
 
 export const RegisterService = {
     register: async (data: RegisterModel) => {
@@ -20,7 +21,7 @@ export const RegisterService = {
             last_name,
             email,
             password: hashedPassword,
-            role: 'user',
+            role: RUE.USER,
         });
 
         return ok({ token: generateJWT(insertUser) });
