@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { Event } from '../events/App.event';
 import UserModel from '../models/User.model';
 import ResetPassword from '../models/ResetPassword.model';
 import { failure, ok } from '../utils/responses';
@@ -20,6 +21,15 @@ export const ForgotPasswordService = {
             token,
             expire_at,
         });
+
+        try {
+            Event.emit('reset::password', {
+                email,
+                token,
+            });
+        } catch (error) {
+            return failure({ error: StatusCodeEnums.UNEXPECTED });
+        }
 
         return ok({});
     },

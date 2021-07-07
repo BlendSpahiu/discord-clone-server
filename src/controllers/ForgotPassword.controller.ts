@@ -7,7 +7,7 @@ export const ForgotPasswordController: Router = Router();
 
 ForgotPasswordController.post(
     '/',
-    ValidationMiddleware(ForgotPasswordValidator, {}, (req: Request) => req.body.input.data),
+    ValidationMiddleware(ForgotPasswordValidator, {}, (req: Request) => req.body.input),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { email } = req.body.input;
