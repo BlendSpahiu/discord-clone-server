@@ -1,9 +1,9 @@
 import crypto from 'crypto';
-import { Event } from '../events/App.event';
-import UserModel from '../models/User.model';
-import ResetPassword from '../models/ResetPassword.model';
 import { failure, ok } from '../utils/responses';
 import { StatusCodeEnums } from '../interfaces/enums/StatusCode.enums';
+import UserModel from '../models/User.model';
+import ResetPassword from '../models/ResetPassword.model';
+import { Event } from '../events/App.event';
 
 export const ForgotPasswordService = {
     forgotPassword: async (email: string) => {
@@ -16,7 +16,7 @@ export const ForgotPasswordService = {
         expire_at.setMinutes(expire_at.getMinutes() + 30);
         const token = crypto.randomBytes(64).toString('hex');
 
-        const insertForgotPassword = await ResetPassword.query().insert({
+        await ResetPassword.query().insert({
             email,
             token,
             expire_at,
