@@ -1,6 +1,5 @@
 import { Model } from 'objection';
 import CompanyModel from './Company.model';
-import ProfileImagesModel from './ProfileImages.model';
 
 export default class UserModel extends Model {
     id!: number;
@@ -49,14 +48,6 @@ export default class UserModel extends Model {
                 join: {
                     from: 'users.id',
                     to: 'companies.user_id',
-                },
-            },
-            profile_images: {
-                relation: Model.HasOneRelation,
-                modelClass: ProfileImagesModel,
-                join: {
-                    from: 'users.id',
-                    to: 'profile_images.user_id',
                 },
             },
         };

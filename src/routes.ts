@@ -1,11 +1,13 @@
 import { Application, Router } from 'express';
 import { PingController } from './controllers/Ping.controller';
 import { LoginController } from './controllers/Login.controller';
+import { UploadController } from './controllers/Upload.controller';
 import { RegisterCompanyController } from './controllers/RegisterCompany.controller';
 
 const _routes: [string, Router][] = [
     ['/ping', PingController],
     ['/login', LoginController],
+    ['/upload', UploadController],
     ['/register-company', RegisterCompanyController],
 ];
 

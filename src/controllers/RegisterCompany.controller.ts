@@ -7,7 +7,7 @@ export const RegisterCompanyController: Router = Router();
 
 RegisterCompanyController.post(
     '/',
-    ValidationMiddleware(RegisterCompanyValidator, {}, (req: Request) => req.body.input.data),
+    ValidationMiddleware(RegisterCompanyValidator, {}, (req: Request) => req.body.input),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { data } = req.body.input;
