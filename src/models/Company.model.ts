@@ -1,19 +1,18 @@
 import { Model } from 'objection';
-import CompanyModel from './Company.model';
+import UserModel from './User.model';
 
-export default class UserModel extends Model {
+export default class CompanyModel extends Model {
     id!: number;
-    first_name!: string;
-    last_name!: string;
-    email!: string;
-    password!: string;
-    role!: string;
+    name!: string;
+    business_number!: number;
+    status!: string;
+    user_id!: number;
     created_at?: Date;
     updated_at?: Date;
 
     // Table name is the only required property.
     static get tableName() {
-        return 'users';
+        return 'companies';
     }
 
     // Optional JSON schema. This is not the database schema!
@@ -23,15 +22,14 @@ export default class UserModel extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['first_name', 'last_name', 'email', 'password', 'role'],
+            required: ['name', 'business_number', 'status', 'user_id'],
 
             properties: {
                 id: { type: 'integer' },
-                first_name: { type: 'string' },
-                last_name: { type: 'string' },
-                email: { type: 'string' },
-                password: { type: 'string' },
-                role: { type: 'string' },
+                name: { type: 'string' },
+                business_number: { type: 'integer' },
+                status: { type: 'string' },
+                user_id: { type: 'integer' },
                 created_at: { type: 'date' },
                 updated_at: { type: 'date' },
             },
@@ -42,12 +40,12 @@ export default class UserModel extends Model {
     // property can be a thunk to prevent circular dependencies.
     static get relationMappings() {
         return {
-            companies: {
-                relation: Model.HasOneRelation,
-                modelClass: CompanyModel,
+            user: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: UserModel,
                 join: {
-                    from: 'users.id',
-                    to: 'companies.user_id',
+                    from: 'companies.user_id',
+                    to: 'users.id',
                 },
             },
         };
