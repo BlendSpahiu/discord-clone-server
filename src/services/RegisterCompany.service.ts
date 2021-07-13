@@ -8,7 +8,7 @@ import { RegisterCompanyModel } from '../interfaces/models/RegisterCompany.model
 
 export const RegisterCompanyService = {
     registerCompany: async (data: RegisterCompanyModel) => {
-        const { first_name, last_name, email, password, company_name, business_number } = data;
+        const { first_name, last_name, email, password, company_name, business_number, file_id } = data;
 
         // Check if user with this email exists
         const users = await UserModel.query().where('email', 'ILIKE', email);
@@ -26,14 +26,17 @@ export const RegisterCompanyService = {
             first_name,
             password: hashedPwd,
             role: RoleUsersEnums.COMPANY,
+            file_id,
         });
 
-        const insertCompany = await CompanyModel.query().insert({
-            business_number,
-            name: company_name,
-            user_id: insertUser.id,
-            status: StatusUserEnums.PENDING,
-        });
+        if (insertUser) {
+            const insertCompany = await CompanyModel.query().insert({
+                business_number,
+                name: company_name,
+                user_id: insertUser.id,
+                status: StatusUserEnums.PENDING,
+            });
+        }
 
         // return the generated token
         return ok({ token: generateJWT(insertUser) });

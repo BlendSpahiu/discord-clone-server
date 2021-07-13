@@ -4,7 +4,7 @@ import { upload } from '../utils/s3Upload';
 
 export const UploadController: Router = Router();
 
-UploadController.post('/', upload.single('file'), async (req: Request, res: Response, next: NextFunction) => {
+UploadController.post('/', upload().single('file'), async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { file } = req;
 

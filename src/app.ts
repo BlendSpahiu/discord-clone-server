@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 import { Model } from 'objection';
 import Knex from 'knex';
 import { routes } from './routes';
-
+import bodyParser from 'body-parser';
 // Middleware
 import { CorsMiddleware } from './middleware/Cors.middleware';
 import { AppErrorHandlerMiddleware } from './middleware/AppErrorHandler.middleware';
@@ -21,7 +21,11 @@ export const app: Application = express();
 app.use(CorsMiddleware);
 
 // Express configuration
-app.use(express.json());
+app.use(
+    bodyParser.urlencoded({
+        extended: true,
+    })
+);
 
 // Application routing
 routes(app);
