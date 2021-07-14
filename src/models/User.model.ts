@@ -24,7 +24,7 @@ export default class UserModel extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['first_name', 'last_name', 'email', 'password', 'role', 'file_id'],
+            required: ['first_name', 'last_name', 'email', 'password', 'role'],
 
             properties: {
                 id: { type: 'integer' },
