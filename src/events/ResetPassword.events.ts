@@ -9,17 +9,15 @@ Event.on('reset::password', async ({ email, token }) => {
         APP_URL_RESET_PASSWORD,
         APP_URL,
     });
-
     const mailOptions = {
         from: MAIL_FROM_ADDRESS,
         to: email,
         subject: 'Password reset link',
         html,
     };
-
-    const { error } = await mailClient.send(mailOptions);
-
-    if (error) {
+    try {
+        await mailClient.send(mailOptions);
+    } catch (error) {
         return failure({ 'Something went wrong sending the email': error });
     }
 });

@@ -8,6 +8,7 @@ export default class UserModel extends Model {
     email!: string;
     password!: string;
     role!: string;
+    file_id?: number;
     created_at?: Date;
     updated_at?: Date;
 
@@ -32,6 +33,7 @@ export default class UserModel extends Model {
                 email: { type: 'string' },
                 password: { type: 'string' },
                 role: { type: 'string' },
+                file_id: { type: 'integer' },
                 created_at: { type: 'date' },
                 updated_at: { type: 'date' },
             },

@@ -2,7 +2,6 @@ import express, { Application } from 'express';
 import { Model } from 'objection';
 import Knex from 'knex';
 import { routes } from './routes';
-
 // Middleware
 import { CorsMiddleware } from './middleware/Cors.middleware';
 import { AppErrorHandlerMiddleware } from './middleware/AppErrorHandler.middleware';

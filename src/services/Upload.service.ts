@@ -12,8 +12,10 @@ export const UploadService = {
             file_path: file.location,
         });
 
-        if (!insertFileImages.id) return failure('UNPROCESSABLE ENTITY', StatusCodeEnums.UNPROCESSABLE_ENTITY);
+        if (!insertFileImages.id) {
+            return failure('UNPROCESSABLE ENTITY', StatusCodeEnums.UNPROCESSABLE_ENTITY);
+        }
 
-        return ok({});
+        return ok({ fileId: insertFileImages.id });
     },
 };
