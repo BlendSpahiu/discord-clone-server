@@ -12,6 +12,12 @@ export const ForgotPasswordService = {
             return failure('Invalid credentials', StatusCodeEnums.INVALID_CREDENTIALS);
         }
 
+        // Check if forget password request exists with this email
+        const requests = await ResetPassword.query().where('email', 'ILIKE', email);
+
+        // delete the old request
+        if (requests.length !== 0) await ResetPassword.query().deleteById(requests[0].id);
+
         const expire_at = new Date();
         expire_at.setMinutes(expire_at.getMinutes() + 30);
         const token = crypto.randomBytes(64).toString('hex');
