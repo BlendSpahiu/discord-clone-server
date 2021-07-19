@@ -15,7 +15,7 @@ export const ForgotPasswordService = {
         // Check if forget password request exists with this email
         const requests = await ResetPassword.query().where('email', 'ILIKE', email);
 
-        // delete the old request
+        // Delete the old request
         if (requests.length !== 0) await ResetPassword.query().deleteById(requests[0].id);
 
         const expire_at = new Date();
