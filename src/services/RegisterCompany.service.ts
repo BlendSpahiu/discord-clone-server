@@ -20,14 +20,11 @@ export const RegisterCompanyService = {
 
         const hashedPwd = await hashPassword(password);
 
-        const insertUser = await UserModel.query().insert({
-            email,
-            last_name,
-            first_name,
-            password: hashedPwd,
-            role: RoleUsersEnums.COMPANY,
-            file_id,
-        });
+        const insertUser = await UserModel.query().insert(
+            file_id
+                ? { email, last_name, first_name, password: hashedPwd, role: RoleUsersEnums.COMPANY, file_id }
+                : { email, last_name, first_name, password: hashedPwd, role: RoleUsersEnums.COMPANY }
+        );
 
         if (insertUser) {
             const insertCompany = await CompanyModel.query().insert({

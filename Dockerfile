@@ -6,3 +6,4 @@ COPY . /app
 RUN npm i
 RUN npm run build
 CMD ["node", "./build/index.js"]
+COPY /src/views /app/build/views

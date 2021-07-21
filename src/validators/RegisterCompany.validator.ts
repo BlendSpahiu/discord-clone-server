@@ -12,5 +12,5 @@ export const RegisterCompanyValidator = Joi.object().keys({
     password: Joi.string().trim().min(8).required(),
     company_name: Joi.string().min(3).required(),
     business_number: Joi.number().min(3).required(),
-    file_id: Joi.number().required(),
+    file_id: Joi.number().optional().allow(null),
 });

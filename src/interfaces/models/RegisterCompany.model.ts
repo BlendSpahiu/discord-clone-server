@@ -5,5 +5,5 @@ export interface RegisterCompanyModel {
     password: string;
     company_name: string;
     business_number: number;
-    file_id: number;
+    file_id?: number | null;
 }
