@@ -1,13 +1,17 @@
 import jwt, { Algorithm } from 'jsonwebtoken';
 import { JWT_ALGORITHM, JWT_SECRET, JWT_EXPIRES_IN } from '../config/jwt';
-import UserModel from '../models/User.model';
 
-export const generateJWT = (user: UserModel) => {
+interface generateJWTProps {
+    id: string;
+    role?: string;
+}
+
+export const generateJWT = ({ id, role }: generateJWTProps) => {
     const payload = {
         'https://hasura.io/jwt/claims': {
-            'x-hasura-allowed-roles': ['user'],
-            'x-hasura-default-role': 'user',
-            'x-hasura-user-id': user.id?.toString(),
+            'x-hasura-allowed-roles': role ? [role, 'user'] : ['user'],
+            'x-hasura-default-role': role ? role : 'user',
+            'x-hasura-user-id': id,
         },
     };
 

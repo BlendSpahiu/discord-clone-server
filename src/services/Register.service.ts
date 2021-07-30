@@ -24,6 +24,6 @@ export const RegisterService = {
             role: RoleUsersEnums.USER,
         });
 
-        return ok({ token: generateJWT(insertUser) });
+        return ok({ token: generateJWT({ id: insertUser.id.toString() }) });
     },
 };
