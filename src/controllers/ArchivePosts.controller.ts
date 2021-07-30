@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction, Router } from 'express';
 import PostModel from '../models/Post.model';
-import { ok } from '../utils';
 
 export const ArchivePostsController: Router = Router();
 
@@ -13,12 +12,10 @@ ArchivePostsController.post('/', async (req: Request, res: Response, next: NextF
         const expiryDate = new Date(dateInSeconds);
 
         // find posts whose date is older than 30 days
-        const posts = await PostModel.query()
+        await PostModel.query()
             .update({ is_archived: true })
             .where('created_at', '<', expiryDate)
             .orWhere('created_at', '=', expiryDate);
-
-        return ok({ posts }, 200);
     } catch (err) {
         next(err);
     }
