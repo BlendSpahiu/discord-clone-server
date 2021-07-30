@@ -10,13 +10,17 @@ export const ArchivePostService = {
         const expiryDate = new Date(dateInSeconds);
 
         // find posts whose date is older than 30 days
-        const posts = await PostModel.query()
+        const archivedPosts = await PostModel.query()
             .where('created_at', '<', expiryDate)
             .orWhere('created_at', '=', expiryDate);
 
-        if (posts.length === 0) return ok({});
+        if (archivedPosts.length === 0) return ok({});
 
-        await PostModel.query().update({ is_archived: true });
+        archivedPosts.forEach(async (post: PostModel) => {
+            const { id } = post;
+            await PostModel.query().findById(id).patch({ is_archived: true });
+        });
+
         return ok({});
     },
 };
