@@ -36,6 +36,6 @@ export const RegisterCompanyService = {
         }
 
         // return the generated token
-        return ok({ token: generateJWT({ id: insertUser.id.toString(), role: RoleUsersEnums.COMPANY }) });
+        return ok({ token: generateJWT(insertUser) });
     },
 };
