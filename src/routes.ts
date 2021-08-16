@@ -6,6 +6,7 @@ import { UploadController } from './controllers/Upload.controller';
 import { ResetPasswordController } from './controllers/ResetPassword.controller';
 import { ForgotPasswordController } from './controllers/ForgotPassword.controller';
 import { RegisterCompanyController } from './controllers/RegisterCompany.controller';
+import { ArchivePostsController } from './controllers/ArchivePosts.controller';
 
 const _routes: [string, Router][] = [
     ['/ping', PingController],
@@ -15,6 +16,7 @@ const _routes: [string, Router][] = [
     ['/reset-password', ResetPasswordController],
     ['/forgot-password', ForgotPasswordController],
     ['/register-company', RegisterCompanyController],
+    ['/archive-posts', ArchivePostsController],
 ];
 
 export const routes = (app: Application): void => {
