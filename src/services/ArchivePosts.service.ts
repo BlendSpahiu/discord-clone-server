@@ -9,7 +9,7 @@ export const ArchivePostService = {
         // get the timestamp version
         const expiryDate = new Date(dateInSeconds);
 
-        // find posts whose date is older than 30 days
+        // find non archived posts whose date is older than 30 days
         const expiredPosts = await PostModel.query()
             .whereNot('is_archived', 'true')
             .where('updated_at', '<=', expiryDate);
