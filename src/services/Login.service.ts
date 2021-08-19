@@ -1,3 +1,4 @@
+import { RoleUsersEnums } from '../interfaces/enums/RoleUsers.enums';
 import { StatusCodeEnums } from '../interfaces/enums/StatusCode.enums';
 import UserModel from '../models/User.model';
 import { ok, failure, generateJWT, comparePassword } from '../utils/index';
