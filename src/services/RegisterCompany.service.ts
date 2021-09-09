@@ -16,7 +16,7 @@ export const RegisterCompanyService = {
 
         // Check if companies with this business number exists
         const companies = await CompanyModel.query().where('business_number', 'ILIKE', business_number);
-        if (companies.length !== 0) return failure('Company exists!', StatusCodeEnums.USER_EXISTS);
+        if (companies.length !== 0) return failure('Company exists!', StatusCodeEnums.COMPANY_EXISTS);
 
         const hashedPwd = await hashPassword(password);
 
