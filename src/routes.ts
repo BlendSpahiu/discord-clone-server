@@ -5,8 +5,10 @@ import { RegisterController } from './controllers/Register.controller';
 import { UploadController } from './controllers/Upload.controller';
 import { ResetPasswordController } from './controllers/ResetPassword.controller';
 import { ForgotPasswordController } from './controllers/ForgotPassword.controller';
-import { RegisterCompanyController } from './controllers/RegisterCompany.controller';
 import { ArchivePostsController } from './controllers/ArchivePosts.controller';
+import { PostController } from './controllers/Post.controller';
+import { UserController } from './controllers/User.controller';
+import { ServerController } from './controllers/Server.controller';
 
 const _routes: [string, Router][] = [
     ['/ping', PingController],
@@ -15,8 +17,10 @@ const _routes: [string, Router][] = [
     ['/upload', UploadController],
     ['/reset-password', ResetPasswordController],
     ['/forgot-password', ForgotPasswordController],
-    ['/register-company', RegisterCompanyController],
     ['/archive-posts', ArchivePostsController],
+    ['/posts', PostController],
+    ['/users', UserController],
+    ['/servers', ServerController],
 ];
 
 export const routes = (app: Application): void => {

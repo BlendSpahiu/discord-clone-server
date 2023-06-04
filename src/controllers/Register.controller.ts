@@ -7,10 +7,10 @@ export const RegisterController: Router = Router();
 
 RegisterController.post(
     '/',
-    ValidationMiddleware(RegisterValidator, {}, (req: Request) => req.body.input.data),
+    ValidationMiddleware(RegisterValidator, {}, (req: Request) => req.body),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { data } = req.body.input;
+            const data = req.body;
 
             const result = await RegisterService.register(data);
 

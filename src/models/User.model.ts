@@ -3,12 +3,16 @@ import CompanyModel from './Company.model';
 
 export default class UserModel extends Model {
     id!: number;
-    first_name!: string;
-    last_name!: string;
+    username!: string;
+    tag!: number;
     email!: string;
+    friends!: string[];
+    phoneNumber!: string;
+    dateOfBirth!: string;
     password!: string;
+    file_id!: string;
+    servers!: string[];
     role!: string;
-    file_id?: number;
     created_at?: Date;
     updated_at?: Date;
 
@@ -24,16 +28,15 @@ export default class UserModel extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['first_name', 'last_name', 'email', 'password', 'role'],
+            required: ['username', 'email', 'password', 'role'],
 
             properties: {
                 id: { type: 'integer' },
-                first_name: { type: 'string' },
-                last_name: { type: 'string' },
+                username: { type: 'string' },
+                tag: { type: 'integer' },
                 email: { type: 'string' },
                 password: { type: 'string' },
                 role: { type: 'string' },
-                file_id: { type: 'integer' },
                 created_at: { type: 'date' },
                 updated_at: { type: 'date' },
             },

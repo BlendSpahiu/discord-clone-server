@@ -58,11 +58,14 @@
         "express": "^4.17.1",
         "joi": "^17.4.0",
         "jsonwebtoken": "^8.5.1",
-        "knex": "^0.21.19",
+        "knex": "^0.21.21",
+        "moment": "^2.29.4",
+        "moment-timezone": "^0.5.43",
         "multer": "^1.4.2",
         "multer-s3": "^2.9.0",
         "nodemailer": "^6.6.2",
         "objection": "^2.2.15",
-        "pg": "^8.6.0"
+        "pg": "^8.6.0",
+        "unique-names-generator": "^4.7.1"
     }
 }

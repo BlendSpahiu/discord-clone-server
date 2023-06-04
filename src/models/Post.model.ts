@@ -2,6 +2,7 @@ import { Model } from 'objection';
 
 export default class PostModel extends Model {
     id!: number;
+    title!: string;
     description!: string;
     number_of_responses!: number;
     number_of_views!: number;

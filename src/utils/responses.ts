@@ -2,15 +2,15 @@ import { baseStatusResponse } from './baseStatusResponse';
 import { ResponseModel } from '../interfaces/models/Response.model';
 import { StatusCodeEnums } from '../interfaces/enums/StatusCode.enums';
 
-export const ok = (data: object, httpCode: number = 200): ResponseModel => ({
+export const ok = (data: Record<string, unknown>, httpCode = 200): ResponseModel => ({
     data: { ...baseStatusResponse, ...data },
     httpCode,
 });
 
 export const failure = (
-    data: object | string,
+    data: Record<string, unknown> | string,
     statusCode: StatusCodeEnums = StatusCodeEnums.UNEXPECTED,
-    httpCode: number = 200
+    httpCode = 200
 ): ResponseModel => {
     return {
         data: {
