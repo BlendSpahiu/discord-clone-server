@@ -20,7 +20,7 @@ export const RegisterValidator = Joi.object().keys({
             'string.pattern.base':
                 'Password must at least have 8 characters, one uppercase letter, one number and one special character.',
         }),
-    dateOfBirth: Joi.string()
+    date_of_birth: Joi.string()
         .required()
         .pattern(new RegExp(/^(0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[\\/-]\d{4}$/))
         .messages({

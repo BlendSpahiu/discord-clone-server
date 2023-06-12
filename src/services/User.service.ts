@@ -31,15 +31,14 @@ export const UserService = {
             email,
             username: `${username}#${Math.floor(1000 + Math.random() * 9000)}`,
             password,
-            role: UserRoleEnums.USER,
         });
 
         return ok({ user });
     },
 
     updateUser: async (id: number, data: UserModel) => {
-        const { username, role, password, email } = data;
-        if (!username && !role && !password && !email) {
+        const { username, password, email } = data;
+        if (!username && !password && !email) {
             return failure('Data must not be empty!', StatusCodeEnums.INVALID_CREDENTIALS);
         }
 
@@ -55,7 +54,6 @@ export const UserService = {
                 .update({
                     username: username || userExists.username,
                     password: (await hashPassword(password)) || userExists.password,
-                    role: role || userExists.role,
                     email: email || userExists.email,
                     updated_at: new Date(),
                 });

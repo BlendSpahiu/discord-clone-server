@@ -6,13 +6,14 @@ export default class UserModel extends Model {
     username!: string;
     tag!: number;
     email!: string;
-    friends!: string[];
-    phoneNumber!: string;
-    dateOfBirth!: string;
+    friends?: string[];
+    phone_number?: string;
+    date_of_birth!: string;
     password!: string;
-    file_id!: string;
-    servers!: string[];
-    role!: string;
+    nickname?: string;
+    file_id?: string;
+    servers?: string[];
+    server_role?: string;
     created_at?: Date;
     updated_at?: Date;
 
@@ -28,7 +29,7 @@ export default class UserModel extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['username', 'email', 'password', 'role'],
+            required: ['username', 'email', 'password', 'date_of_birth'],
 
             properties: {
                 id: { type: 'integer' },
@@ -36,7 +37,7 @@ export default class UserModel extends Model {
                 tag: { type: 'integer' },
                 email: { type: 'string' },
                 password: { type: 'string' },
-                role: { type: 'string' },
+                server_role: { type: 'string' },
                 created_at: { type: 'date' },
                 updated_at: { type: 'date' },
             },

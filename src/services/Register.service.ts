@@ -2,11 +2,12 @@ import { StatusCodeEnums } from '../interfaces/enums/StatusCode.enums';
 import UserModel from '../models/User.model';
 import { RegisterModel } from '../interfaces/models/Register.model';
 import { ok, failure, generateJWT, hashPassword } from '../utils/index';
-import { UserRoleEnums } from '../interfaces/enums/UserRoles.enums';
 
 export const RegisterService = {
     register: async (data: RegisterModel) => {
-        const { username, email, password } = data;
+        const { username, email, password, date_of_birth } = data;
+
+        console.log(data);
 
         // Check if user with this email exists
         const userExists = await UserModel.query().findOne({ email });
@@ -23,9 +24,9 @@ export const RegisterService = {
             tag: Math.floor(1000 + Math.random() * 9000),
             email,
             password: hashedPassword,
-            role: UserRoleEnums.USER,
+            date_of_birth,
         });
 
-        return ok({ token: generateJWT(insertUser) });
+        return ok({ token: generateJWT(insertUser), user: insertUser });
     },
 };

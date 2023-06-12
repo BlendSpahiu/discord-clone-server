@@ -7,10 +7,10 @@ export const LoginController: Router = Router();
 
 LoginController.post(
     '/',
-    ValidationMiddleware(LoginValidator, {}, (req: Request) => req.body),
+    ValidationMiddleware(LoginValidator, {}, (req: Request) => req.body.input),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { email, password } = req.body;
+            const { email, password } = req.body.input;
 
             const result = await LoginService.login(email, password);
 

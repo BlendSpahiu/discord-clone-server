@@ -5,8 +5,7 @@ import UserModel from '../models/User.model';
 export const generateJWT = (user: UserModel) => {
     return jwt.sign(
         {
-            'user-id': user.id.toString(),
-            'user-role': user.role.toString(),
+            user_id: user.id.toString(),
         },
         JWT_SECRET,
         {

@@ -7,15 +7,19 @@ export const RegisterController: Router = Router();
 
 RegisterController.post(
     '/',
-    ValidationMiddleware(RegisterValidator, {}, (req: Request) => req.body),
+    ValidationMiddleware(RegisterValidator, {}, (req: Request) => req.body.input.obj),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const data = req.body;
+            const data = req.body.input.obj;
 
             const result = await RegisterService.register(data);
 
+            console.log(result);
+
             res.status(result.httpCode).send(result.data);
         } catch (err) {
+            console.log(err);
+
             next(err);
         }
     }
