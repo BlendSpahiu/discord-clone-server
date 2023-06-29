@@ -27,6 +27,6 @@ export const RegisterService = {
             date_of_birth,
         });
 
-        return ok({ token: generateJWT(insertUser), user: insertUser });
+        return ok({ token: generateJWT(insertUser) });
     },
 };

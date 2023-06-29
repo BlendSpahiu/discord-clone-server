@@ -18,6 +18,6 @@ export const LoginService = {
         if (!match) return failure('Invalid Credentials!', StatusCodeEnums.INVALID_CREDENTIALS, 401);
 
         // return the generated token
-        return ok({ token: generateJWT(user), user });
+        return ok({ token: generateJWT(user) });
     },
 };
